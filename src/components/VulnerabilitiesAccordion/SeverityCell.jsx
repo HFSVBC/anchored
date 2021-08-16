@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const SeverityCell = ({
   value,
@@ -21,6 +22,10 @@ const SeverityCell = ({
   return (
     <span className={textColor}>{value}</span>
   );
+};
+
+SeverityCell.propTypes = {
+  value: PropTypes.string.isRequired,
 };
 
 export default SeverityCell;

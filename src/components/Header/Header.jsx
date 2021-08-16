@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Helpers from '../../Helpers';
 
@@ -29,6 +30,14 @@ const Header = ({
       </div>
     </div>
   );
+};
+
+Header.propTypes = {
+  imageMetadata: PropTypes.shape({
+    tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+    digest: PropTypes.string.isRequired,
+    size: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
 export default Header;

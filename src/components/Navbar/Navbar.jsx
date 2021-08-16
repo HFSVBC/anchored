@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import UploadForm from './UploadForm';
 
 const Navbar = ({
@@ -12,5 +14,9 @@ const Navbar = ({
     </div>
   </nav>
 );
+
+Navbar.propTypes = {
+  handleFileLoad: PropTypes.func.isRequired,
+};
 
 export default Navbar;

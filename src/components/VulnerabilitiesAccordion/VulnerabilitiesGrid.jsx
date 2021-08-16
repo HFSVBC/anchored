@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { AgGridColumn, AgGridReact } from 'ag-grid-react';
 import SeverityCell from './SeverityCell';
 
@@ -62,6 +63,11 @@ const VulnerabilitiesGrid = ({
       </AgGridReact>
     </div>
   );
+};
+
+VulnerabilitiesGrid.propTypes = {
+  accordionRef: PropTypes.objectOf(PropTypes.shape).isRequired,
+  layerMatches: PropTypes.arrayOf(PropTypes.shape).isRequired,
 };
 
 export default VulnerabilitiesGrid;

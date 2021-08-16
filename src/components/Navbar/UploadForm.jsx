@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 const UploadForm = ({
   handleFileLoad,
@@ -9,7 +10,7 @@ const UploadForm = ({
     event.preventDefault();
 
     if (!file) {
-      alert('No file selected!');
+      alert('No file selected!'); // eslint-disable-line no-alert
       return;
     }
 
@@ -39,6 +40,10 @@ const UploadForm = ({
       </div>
     </form>
   );
+};
+
+UploadForm.propTypes = {
+  handleFileLoad: PropTypes.func.isRequired,
 };
 
 export default UploadForm;

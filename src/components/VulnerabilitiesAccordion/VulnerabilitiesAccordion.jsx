@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Pluralize from 'pluralize';
 
 import VulnerabilitiesGrid from './VulnerabilitiesGrid';
@@ -36,21 +37,21 @@ const VulnerabilitiesAccordion = ({
           : '' }
         { medium
           ? (
-            <span className="ps-2 text-danger">
+            <span className="ps-2 text-warning">
               {Pluralize('Medium Vulnerability', medium, true)}
             </span>
           )
           : '' }
         { low
           ? (
-            <span className="ps-2 text-danger">
+            <span className="ps-2">
               {Pluralize('Low Vulnerability', low, true)}
             </span>
           )
           : '' }
         { negligible
           ? (
-            <span className="ps-2 text-danger">
+            <span className="ps-2">
               {Pluralize('Negligible Vulnerability', negligible, true)}
             </span>
           )
@@ -106,6 +107,16 @@ const VulnerabilitiesAccordion = ({
       {accordionItems()}
     </div>
   );
+};
+
+VulnerabilitiesAccordion.propTypes = {
+  imageMetadata: PropTypes.shape({
+    tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+    digest: PropTypes.string.isRequired,
+    size: PropTypes.number.isRequired,
+    layers: PropTypes.arrayOf(PropTypes.shape).isRequired,
+  }).isRequired,
+  matches: PropTypes.objectOf(PropTypes.shape).isRequired,
 };
 
 export default VulnerabilitiesAccordion;
