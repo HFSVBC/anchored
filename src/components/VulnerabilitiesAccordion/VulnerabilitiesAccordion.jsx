@@ -7,9 +7,9 @@ import Helpers from '../../Helpers';
 
 const VulnerabilitiesAccordion = ({
   imageMetadata,
-  matches
+  matches,
 }) => {
-  const layers = imageMetadata["layers"];
+  const { layers } = imageMetadata;
 
   const accordionHeader = (layerMatches) => {
     const critical = Helpers.layerMatchesBySeverity(layerMatches, 'critical').length;
@@ -20,67 +20,86 @@ const VulnerabilitiesAccordion = ({
 
     return (
       <>
-        { critical ?
-          <span className="ps-2 text-danger">{Pluralize('Critical Vulnerability', critical, true)} </span> :
-          "" }
-
-        { high ?
-          <span className="ps-2 text-danger">{Pluralize('High Vulnerability', high, true)}</span> :
-          "" }
-
-        { medium ?
-          <span className="ps-2 text-warning">{Pluralize('Medium Vulnerability', medium, true)}</span> :
-          "" }
-
-        { low ?
-          <span className="ps-2">{Pluralize('Low Vulnerability', low, true)}</span> :
-          "" }
-
-        { negligible ?
-          <span className="ps-2">{Pluralize('Negligible Vulnerability', negligible, true)}</span> :
-          "" }
+        { critical
+          ? (
+            <span className="ps-2 text-danger">
+              {Pluralize('Critical Vulnerability', critical, true)}
+            </span>
+          )
+          : '' }
+        { high
+          ? (
+            <span className="ps-2 text-danger">
+              {Pluralize('High Vulnerability', high, true)}
+            </span>
+          )
+          : '' }
+        { medium
+          ? (
+            <span className="ps-2 text-danger">
+              {Pluralize('Medium Vulnerability', medium, true)}
+            </span>
+          )
+          : '' }
+        { low
+          ? (
+            <span className="ps-2 text-danger">
+              {Pluralize('Low Vulnerability', low, true)}
+            </span>
+          )
+          : '' }
+        { negligible
+          ? (
+            <span className="ps-2 text-danger">
+              {Pluralize('Negligible Vulnerability', negligible, true)}
+            </span>
+          )
+          : '' }
       </>
     );
-  }
+  };
 
-  const accordionItems = () => {
-    return layers.map((layer, index) => {
-      if (matches[index] && matches[index].length > 0) {
-        const accordionRef = React.createRef();
+  const accordionItems = () => layers.map((layer, index) => {
+    if (matches[index] && matches[index].length > 0) {
+      const accordionRef = React.createRef();
 
-        return(
-          <div key={layer["digest"]} className="accordion-item">
-            <h2 className="accordion-header" id={`heading-${index}`}>
-              <button
-                className="accordion-button collapsed"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target={`#collapse-${index}`}
-                aria-expanded="false"
-                aria-controls={`collapse-${index}`} >
-                <strong>Layer {index}</strong>
+      return (
+        <div key={layer.digest} className="accordion-item">
+          <h2 className="accordion-header" id={`heading-${index}`}>
+            <button
+              className="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target={`#collapse-${index}`}
+              aria-expanded="false"
+              aria-controls={`collapse-${index}`}
+            >
+              <strong>
+                Layer
+                {index}
+              </strong>
 
-                {accordionHeader(matches[index])}
-              </button>
-            </h2>
+              {accordionHeader(matches[index])}
+            </button>
+          </h2>
 
-            <div
-              id={`collapse-${index}`}
-              className="accordion-collapse collapse"
-              aria-labelledby={`heading-${index}`}
-              data-bs-parent="#vulnerabilitiesAccordion"
-              ref={accordionRef} >
-              <div className="accordion-body">
-                <VulnerabilitiesGrid layerMatches={matches[index]} accordionRef={accordionRef}/>
-              </div>
+          <div
+            id={`collapse-${index}`}
+            className="accordion-collapse collapse"
+            aria-labelledby={`heading-${index}`}
+            data-bs-parent="#vulnerabilitiesAccordion"
+            ref={accordionRef}
+          >
+            <div className="accordion-body">
+              <VulnerabilitiesGrid layerMatches={matches[index]} accordionRef={accordionRef} />
             </div>
           </div>
-        )
-      } else {
-        return "";
-      }
-    });
-  };
+        </div>
+      );
+    }
+
+    return '';
+  });
 
   return (
     <div className="accordion" id="vulnerabilitiesAccordion">

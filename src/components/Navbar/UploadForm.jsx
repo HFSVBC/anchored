@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 const UploadForm = ({
-  handleFileLoad
+  handleFileLoad,
 }) => {
   const [file, setFile] = useState();
 
@@ -9,16 +9,16 @@ const UploadForm = ({
     event.preventDefault();
 
     if (!file) {
-      alert("No file selected!");
+      alert('No file selected!');
       return;
     }
 
     const reader = new FileReader();
-      reader.onload = function(evt) {
+    reader.onload = (evt) => {
       handleFileLoad(JSON.parse(evt.target.result));
     };
     reader.readAsText(file);
-  }
+  };
 
   return (
     <form className="d-flex" onSubmit={handleFileSubmit}>
@@ -26,13 +26,14 @@ const UploadForm = ({
         <div className="input-group">
           <input
             type="file"
-            onChange={event => setFile(event.target.files[0])}
+            onChange={(event) => setFile(event.target.files[0])}
             accept="application/JSON"
             className="form-control"
             id="inputGroupFile"
             aria-describedby="inputGroupFileAddon"
             aria-label="Upload"
-            required />
+            required
+          />
           <button className="btn btn-outline-primary" type="submit" id="inputGroupFileAddon">Load</button>
         </div>
       </div>

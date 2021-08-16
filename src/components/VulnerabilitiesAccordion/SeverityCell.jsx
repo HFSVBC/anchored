@@ -1,22 +1,22 @@
 import React from 'react';
 
 const SeverityCell = ({
-  value
+  value,
 }) => {
-  let textColor = "text-body";
+  let textColor = 'text-body';
 
-  // "negligible", "low", "medium", "high" and "critical"
+  // 'negligible', 'low', 'medium', 'high' and 'critical'
   switch (value) {
     case 'High':
     case 'Critical':
-      textColor = "text-danger";
+      textColor = 'text-danger';
       break;
     case 'Medium':
-      textColor = "text-warning";
+      textColor = 'text-warning';
       break;
     default:
-      textColor = "text-body";
-  };
+      textColor = 'text-body';
+  }
 
   return (
     <span className={textColor}>{value}</span>
