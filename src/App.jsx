@@ -15,8 +15,6 @@ function App() {
   const [matches, setMatches] = useState();
 
   const handleOnVulnerabilitiesFileSubmit = (vulnerabilities) => {
-    console.debug('vulnerabilities', vulnerabilities);
-
     setImageMetadata(vulnerabilities.image);
     setMatches(Helpers.parseMatches(vulnerabilities));
   };

@@ -20,7 +20,6 @@ function parseMatches(vulnerabilities) {
     ));
   });
 
-  console.debug('tmpMatches', tmpMatches);
   return tmpMatches;
 }
 
