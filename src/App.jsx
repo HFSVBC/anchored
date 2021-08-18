@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 
 import Navbar from './components/Navbar';
-import Header from './components/Header';
-import VulnerabilitiesAccordion from './components/VulnerabilitiesAccordion';
+import Footer from './components/Footer';
+import Heroe from './components/Heroe';
+import VulnerabilitiesGrid from './components/VulnerabilitiesGrid';
+import NoFileOverlay from './components/NoFileOverlay';
 
 import Helpers from './Helpers';
 
@@ -10,27 +12,36 @@ import './styles.scss';
 
 function App() {
   const [imageMetadata, setImageMetadata] = useState();
-  const [matches, setMatches] = useState({});
+  const [matches, setMatches] = useState();
 
   const handleOnVulnerabilitiesFileSubmit = (vulnerabilities) => {
+    console.debug('vulnerabilities', vulnerabilities);
+
     setImageMetadata(vulnerabilities.image);
     setMatches(Helpers.parseMatches(vulnerabilities));
   };
 
   return (
-    <div className="App">
-      <Navbar handleFileLoad={handleOnVulnerabilitiesFileSubmit} />
-      <div className="py-3 container">
-        { imageMetadata && matches
-          ? (
-            <>
-              <Header imageMetadata={imageMetadata} matches={matches} />
-              <VulnerabilitiesAccordion imageMetadata={imageMetadata} matches={matches} />
-            </>
-          )
-          : '' }
+    <main className="App d-flex flex-column">
+      <div className="w-100">
+        <Navbar handleFileLoad={handleOnVulnerabilitiesFileSubmit} />
       </div>
-    </div>
+      <div className="container d-flex align-items-end flex-column flex-grow-1">
+        <div className="w-100 h-100 d-flex flex-column">
+          { imageMetadata && matches
+            ? (
+              <>
+                <Heroe imageMetadata={imageMetadata} matches={matches} />
+                <VulnerabilitiesGrid matches={matches} />
+              </>
+            )
+            : <NoFileOverlay /> }
+        </div>
+        <div className="w-100 mt-auto">
+          <Footer />
+        </div>
+      </div>
+    </main>
   );
 }
 

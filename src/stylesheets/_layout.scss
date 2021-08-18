@@ -1,0 +1,12 @@
+html, body{
+  height: 100%;
+  min-height: 945px;
+}
+
+#root, .App {
+  height: 100%;
+
+  .container{
+    height: 100%;
+  }
+}

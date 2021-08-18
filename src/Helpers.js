@@ -6,14 +6,21 @@ function bytesToSize(bytes) {
 }
 
 function parseMatches(vulnerabilities) {
-  const tmpMatches = {};
+  const tmpMatches = {
+    negligible: [],
+    low: [],
+    medium: [],
+    high: [],
+    critical: [],
+  };
 
-  for (let i = 0; i < vulnerabilities.image.layers.length; i += 1) {
-    tmpMatches[i] = vulnerabilities.matches.filter((match) => (
-      match.artifact.locations[0].layerIndex === i
+  Object.keys(tmpMatches).forEach((severity) => {
+    tmpMatches[severity] = vulnerabilities.matches.filter((match) => (
+      match.vulnerability.severity.toLowerCase() === severity
     ));
-  }
+  });
 
+  console.debug('tmpMatches', tmpMatches);
   return tmpMatches;
 }
 
