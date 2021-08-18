@@ -45,11 +45,12 @@ const VulnerabilitiesGrid = ({
       >
         <AgGridColumn headerName="Vulnerability">
           <AgGridColumn headerName="ID" field="vulnerability.id" minWidth={190} />
-          <AgGridColumn headerName="Severity" field="vulnerability.severity" maxWidth={130} sortable="true" cellRenderer="severityCell" />
+          <AgGridColumn headerName="Severity" field="vulnerability.severity" minWidth={120} sortable="true" cellRenderer="severityCell" />
           <AgGridColumn headerName="Description" field="vulnerability.description" minWidth={500} />
         </AgGridColumn>
 
         <AgGridColumn headerName="Artifact">
+          <AgGridColumn headerName="Type" field="artifact.type" />
           <AgGridColumn headerName="Package" field="artifact.name" />
           <AgGridColumn headerName="Version" field="artifact.version" />
         </AgGridColumn>
