@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import pluralize from 'pluralize';
 
 const fontStyles = { fontSize: '1.75rem' };
 
@@ -14,16 +15,16 @@ const Header = ({
     const image = imageMetadata.tags[0].split(':');
     setImageTag(image[1]);
     setImageRepo(image[0]);
-  }, []);
+  }, [imageMetadata]);
 
-  const counterLegend = (vulnerabilitiesCount) => `${vulnerabilitiesCount} vulnerabilities found`;
+  const counterLegend = (vulnerabilitiesCount) => `${pluralize('vulnerability', vulnerabilitiesCount, true)} found`;
 
   return (
     <>
       <div className="row pt-4">
         <div className="col-md-10">
           <h5 className="mb-0">{imageRepo}</h5>
-          <p className="text-muted">{imageTag}</p>
+          <p className="text-muted">{`${imageTag} - ${pluralize('layer', imageMetadata.layers.length, true)}`}</p>
         </div>
       </div>
 
@@ -64,8 +65,7 @@ const Header = ({
 Header.propTypes = {
   imageMetadata: PropTypes.shape({
     tags: PropTypes.arrayOf(PropTypes.string).isRequired,
-    digest: PropTypes.string.isRequired,
-    size: PropTypes.number.isRequired,
+    layers: PropTypes.arrayOf(PropTypes.shape).isRequired,
   }).isRequired,
   matches: PropTypes.objectOf(PropTypes.shape).isRequired,
 };

@@ -27,7 +27,7 @@ const VulnerabilitiesGrid = ({
         .concat(matches.low)
         .concat(matches.negligible),
     );
-  }, []);
+  }, [matches]);
 
   const onGridReady = (params) => {
     params.api.sizeColumnsToFit();
