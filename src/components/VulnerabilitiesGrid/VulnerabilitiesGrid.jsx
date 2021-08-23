@@ -3,6 +3,7 @@ import { AgGridColumn, AgGridReact } from 'ag-grid-react';
 import PropTypes from 'prop-types';
 
 import SeverityCell from './SeverityCell';
+import SeverityFilter from './SeverityFilter';
 
 const gridStyles = { minHeight: '480px', width: '100%' };
 
@@ -10,7 +11,7 @@ const defaultColDef = {
   filter: 'agTextColumnFilter',
   resizable: true,
 };
-const frameworkComponents = { severityCell: SeverityCell };
+const frameworkComponents = { severityCell: SeverityCell, severityFilter: SeverityFilter };
 
 const layerIndexValueGetter = (params) => params.data.artifact.locations[0].layerIndex;
 
@@ -45,7 +46,7 @@ const VulnerabilitiesGrid = ({
       >
         <AgGridColumn headerName="Vulnerability">
           <AgGridColumn headerName="ID" field="vulnerability.id" minWidth={190} />
-          <AgGridColumn headerName="Severity" field="vulnerability.severity" minWidth={120} sortable="true" cellRenderer="severityCell" />
+          <AgGridColumn headerName="Severity" field="vulnerability.severity" minWidth={120} sortable="true" cellRenderer="severityCell" filter="severityFilter" />
           <AgGridColumn headerName="Description" field="vulnerability.description" minWidth={500} />
         </AgGridColumn>
 
