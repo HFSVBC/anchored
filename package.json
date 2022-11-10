@@ -6,7 +6,7 @@
     "@popperjs/core": "^2.10.2",
     "ag-grid-community": "^25.3.0",
     "ag-grid-react": "^25.3.0",
-    "bootstrap-icons": "^1.6.0",
+    "bootstrap-icons": "^1.9.1",
     "bootstrap": "^5.1.2",
     "pluralize": "^8.0.0",
     "prop-types": "^15.7.2",
